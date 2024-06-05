@@ -79,7 +79,7 @@ public class ProductoController {
                 
         // Genera un nombre único para el archivo y guarda la imagen
         for (int i = 0; i < files.length; i++) {
-            String fileName = System.currentTimeMillis() + "_" + files[i].getOriginalFilename();
+            String fileName = UUID.randomUUID().toString() + "_" + files[i].getOriginalFilename();
             File dest = new File(uploadDirectory + "/" + fileName);
             try {
                 files[i].transferTo(dest);
