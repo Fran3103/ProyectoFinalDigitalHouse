@@ -128,11 +128,10 @@ public class ProductoController {
     }
 
     // agrego funcion para eliminar todos los productos
-    @DeleteMapping("/all")
+    @DeleteMapping("/productos")
     public String allProductos() {
-        Producto producto = (Producto) productoRepository.findAll();
 
-        productoRepository.delete(producto);
+        productoRepository.deleteAll();
         return "Todos los productos han sido eliminados";
     }
 }
