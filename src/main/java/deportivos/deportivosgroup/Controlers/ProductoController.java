@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +101,7 @@ public class ProductoController {
         // Guarda las imagenes
         List<Imagenes> imagenes = new ArrayList<>();
         for(MultipartFile file : files){
-            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+            String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
             File dest = new File(uploadDirectory + "/" + fileName);
             try {
                 file.transferTo(dest);
