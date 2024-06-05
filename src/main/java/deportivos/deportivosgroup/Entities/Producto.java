@@ -1,9 +1,13 @@
 package deportivos.deportivosgroup.Entities;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Producto {
@@ -17,6 +21,11 @@ public class Producto {
     private String marca;
     private String color;
     private String url;
+
+
+    @OneToMany(mappedBy =  "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Imagenes> imagenes;
+    
 
     public Long getId() {
         return id;
@@ -60,8 +69,13 @@ public class Producto {
     public void setUrl(String url) {
         this.url = url;
     }
-
-   
+    public List<Imagenes> getImagenes() {
+        return imagenes;
+    }
+    public void setImagenes(List<Imagenes> imagenes) {
+        this.imagenes = imagenes;
+    }
+ 
 
     
 
