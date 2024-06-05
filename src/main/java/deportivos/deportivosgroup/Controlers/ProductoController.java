@@ -2,7 +2,7 @@ package deportivos.deportivosgroup.Controlers;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -66,15 +66,26 @@ public class ProductoController {
             dir.mkdirs();
         }
 
-        // // Genera un nombre único para el archivo y guarda la imagen
         // String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
         // File dest = new File(uploadDirectory + "/" + fileName);
         // try {
-        //     file.transferTo(dest);
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
-        // }
+            //     file.transferTo(dest);
+            // } catch (IOException e) {
+                //     e.printStackTrace();
+                //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
+                // }
+                
+        // Genera un nombre único para el archivo y guarda la imagen
+        for (int i = 0; i < files.length; i++) {
+            String fileName = System.currentTimeMillis() + "_" + files[i].getOriginalFilename();
+            File dest = new File(uploadDirectory + "/" + fileName);
+            try {
+                files[i].transferTo(dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
+            }
+        }
 
         // Crea y guarda el producto en la base de datos
         Producto producto = new Producto();
@@ -83,7 +94,7 @@ public class ProductoController {
         producto.setMarca(marca);
         producto.setColor(color);
         producto.setCategoria(categoria);
-        producto = productoRepository.save(producto);
+        producto  = productoRepository.save(producto);
         
         // Guarda las imagenes
         List<Imagenes> imagenes = new ArrayList<>();
