@@ -94,7 +94,7 @@ public class ProductoController {
         producto.setMarca(marca);
         producto.setColor(color);
         producto.setCategoria(categoria);
-        producto  = productoRepository.save(producto);
+        productoRepository.save(producto);
         
         // Guarda las imagenes
         List<Imagenes> imagenes = new ArrayList<>();
