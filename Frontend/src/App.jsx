@@ -6,6 +6,23 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+
+ 
+
+   fetch('https://tu-app-en-railway.up.railway.app/productos')
+   .then(response => {
+     if (!response.ok) {
+       throw new Error('Network response was not ok ' + response.statusText);
+     }
+     return response.json();
+   })
+   .then(data => {
+     console.log(data); // Manejar los datos obtenidos
+   })
+   .catch(error => {
+     console.error('Hubo un problema con la solicitud fetch:', error);
+   });
+
   return (
     <>
       <div>
