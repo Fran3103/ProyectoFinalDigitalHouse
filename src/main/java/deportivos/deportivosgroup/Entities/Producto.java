@@ -2,6 +2,8 @@ package deportivos.deportivosgroup.Entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +25,8 @@ public class Producto {
     private String url;
 
 
-    @OneToMany(mappedBy =  "producto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy =  "producto", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Imagenes> imagenes;
     
 
