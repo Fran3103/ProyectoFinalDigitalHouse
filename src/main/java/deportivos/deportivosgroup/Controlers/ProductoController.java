@@ -61,7 +61,12 @@ public class ProductoController {
             @RequestParam("precio") Double precio,
             @RequestParam("marca") String marca,
             @RequestParam("color") String color,
-            @RequestParam("categoria") String categoria) {
+            @RequestParam("categoria") String categoria,
+            @RequestParam("descripcion") String descripcion) {
+
+        if (productoRepository.tituloRepetido(titulo)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "Ya existe un producto con ese titulo, por favor ingrese un titulo diferente");
+        }        
     
         String uploadDirectory = System.getProperty("user.dir") + "/uploads";
         File dir = new File(uploadDirectory);
@@ -75,6 +80,7 @@ public class ProductoController {
         producto.setMarca(marca);
         producto.setColor(color);
         producto.setCategoria(categoria);
+        producto.setDescripcion(descripcion);
         productoRepository.save(producto);
         
         List<Imagenes> imagenes = new ArrayList<>();
@@ -130,7 +136,7 @@ public class ProductoController {
         producto.setCategoria(detalleProducto.getCategoria());
         producto.setColor(detalleProducto.getColor());
         producto.setMarca(detalleProducto.getMarca());
-        producto.setUrl(detalleProducto.getUrl());
+        producto.setDescripcion(detalleProducto.getDescripcion());
 
         return productoRepository.save(producto);
     }
