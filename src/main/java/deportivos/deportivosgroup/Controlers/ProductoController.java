@@ -69,33 +69,29 @@ public class ProductoController {
             dir.mkdirs();
         }
     
-        List<Imagenes> imagenes = new ArrayList<>();
         Producto producto = new Producto();
         producto.setTitulo(titulo);
         producto.setPrecio(precio);
         producto.setMarca(marca);
         producto.setColor(color);
         producto.setCategoria(categoria);
-        producto.setUrl(uploadDirectory);        
         productoRepository.save(producto);
-
-    
-        // for (MultipartFile file : files) {
-        //     String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-        //     File dest = new File(uploadDirectory + "/" + fileName);
-        //     try {
-        //         file.transferTo(dest);
-        //     } catch (IOException e) {
-        //         e.printStackTrace();
-        //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
-        //     }
-    
-        //     Imagenes imagen = new Imagenes();
-        //     imagen.setUrl("/uploads/" + fileName);
-        //     imagen.setProducto(producto);
-        //     imagenes.add(imagen);
-        // }
-    
+        
+        List<Imagenes> imagenes = new ArrayList<>();
+        for (MultipartFile file : files) {
+            String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+            File dest = new File(uploadDirectory + "/" + fileName);
+            try {
+                file.transferTo(dest);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
+            }
+            Imagenes imagen = new Imagenes();
+            imagen.setUrl("/uploads/" + fileName);
+            imagen.setProducto(producto);
+            imagenes.add(imagen);
+        }
         imagenesRepositories.saveAll(imagenes);
     
         return ResponseEntity.ok("Archivos subidos exitosamente y producto creado");
