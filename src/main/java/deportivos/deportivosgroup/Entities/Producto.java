@@ -22,7 +22,7 @@ public class Producto {
     private String categoria;
     private String marca;
     private String color;
-    private String url;
+    private String descripcion;
 
 
     @OneToMany(mappedBy =  "producto", cascade = CascadeType.ALL)
@@ -66,11 +66,11 @@ public class Producto {
     public void setColor(String color) {
         this.color = color;
     }
-    public String getUrl() {
-        return url;
+    public String getDescripcion() {
+        return descripcion;
     }
-    public void setUrl(String url) {
-        this.url = url;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     public List<Imagenes> getImagenes() {
         return imagenes;
