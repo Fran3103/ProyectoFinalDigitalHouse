@@ -64,9 +64,9 @@ public class ProductoController {
             @RequestParam("categoria") String categoria,
             @RequestParam("descripcion") String descripcion) {
 
-        if (productoRepository.tituloRepetido(titulo)){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "Ya existe un producto con ese titulo, por favor ingrese un titulo diferente");
-        }        
+        // if (productoRepository.tituloRepetido(titulo)){
+        //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "Ya existe un producto con ese titulo, por favor ingrese un titulo diferente");
+        // }        
     
         String uploadDirectory = System.getProperty("user.dir") + "/uploads";
         File dir = new File(uploadDirectory);
