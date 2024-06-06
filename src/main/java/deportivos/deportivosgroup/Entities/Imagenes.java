@@ -1,5 +1,7 @@
 package deportivos.deportivosgroup.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +17,8 @@ public class Imagenes {
     private String url;
 
     @ManyToOne
-    @JoinColumn(name = "producto_id", nullable = false)
+    @JoinColumn(name = "producto_id")
+    @JsonBackReference
     private Producto producto;
 
     public Long getId() {
