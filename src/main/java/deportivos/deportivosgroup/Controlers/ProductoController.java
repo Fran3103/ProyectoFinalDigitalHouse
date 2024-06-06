@@ -76,7 +76,9 @@ public class ProductoController {
         producto.setMarca(marca);
         producto.setColor(color);
         producto.setCategoria(categoria);
+        producto.setUrl(uploadDirectory);        
         productoRepository.save(producto);
+
     
         // for (MultipartFile file : files) {
         //     String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
