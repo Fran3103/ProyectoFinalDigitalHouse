@@ -63,7 +63,7 @@ public class ProductoController {
             @RequestParam("color") String color,
             @RequestParam("categoria") String categoria,
             @RequestParam("descripcion") String descripcion) {
-
+ 
         // if (productoRepository.tituloRepetido(titulo)){
         //     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( "Ya existe un producto con ese titulo, por favor ingrese un titulo diferente");
         // }        
