@@ -68,26 +68,26 @@ public class ProductoController {
             dir.mkdirs();
         }
 
-        // String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-        // File dest = new File(uploadDirectory + "/" + fileName);
-        // try {
-            //     file.transferTo(dest);
-            // } catch (IOException e) {
-                //     e.printStackTrace();
-                //     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
-                // }
+        String fileName = System.currentTimeMillis() + "_" + files[0].getOriginalFilename();
+        File dest = new File(uploadDirectory + "/" + fileName);
+        try {
+                files[0].transferTo(dest);
+            } catch (IOException e) {
+                    e.printStackTrace();
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
+                }
                 
         // Genera un nombre único para el archivo y guarda la imagen
-        for (int i = 0; i < files.length; i++) {
-            String fileName = UUID.randomUUID().toString() + "_" + files[i].getOriginalFilename();
-            File dest = new File(uploadDirectory + "/" + fileName);
-            try {
-                files[i].transferTo(dest);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
-            }
-        }
+        // for (int i = 0; i < files.length; i++) {
+        //     String fileName = UUID.randomUUID().toString() + "_" + files[i].getOriginalFilename();
+        //     File dest = new File(uploadDirectory + "/" + fileName);
+        //     try {
+        //         files[i].transferTo(dest);
+        //     } catch (IOException e) {
+        //         e.printStackTrace();
+        //         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
+        //     }
+        // }
 
         // Crea y guarda el producto en la base de datos
         Producto producto = new Producto();
@@ -101,17 +101,17 @@ public class ProductoController {
         // Guarda las imagenes
         List<Imagenes> imagenes = new ArrayList<>();
         for(MultipartFile file : files){
-            String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
-            File dest = new File(uploadDirectory + "/" + fileName);
+            String fileNames = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+            File dests = new File(uploadDirectory + "/" + fileName);
             try {
-                file.transferTo(dest);
+                file.transferTo(dests);
             }catch (IOException e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al subir el archivo");
             }
 
             Imagenes imagen = new Imagenes();
-            imagen.setUrl("/uploads/" + fileName);
+            imagen.setUrl("/uploads/" + fileNames);
             imagen.setProducto(producto);
             imagenes.add(imagen);
         }
